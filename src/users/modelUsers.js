@@ -1,5 +1,5 @@
 import { Sequelize , DataTypes, Model } from 'sequelize';
-import sequelize from '../../config/SQLDB.js';
+import connection from '../../config/SQLDB.js';
 
 class User extends Model {}
 
@@ -21,11 +21,10 @@ User.init({
   }
 }, {
   // Other model options go here
-  sequelize, // We need to pass the connection instance
+  sequelize: connection, // We need to pass the connection instance
   modelName: 'User' // We need to choose the model name
 });
 
 // the defined model is the class itself
-console.log(User === sequelize.models.User, 'created user');
 User.sync()
 export default User;

@@ -1,16 +1,15 @@
 import { Sequelize } from "sequelize";
 
-let sequelize;
+const connection = new Sequelize('apirestfullmovies', 'root', 'a12345678', {
+  host: 'localhost',
+  dialect: 'mysql'
+});
 
 try {
-  sequelize = new Sequelize('apirestfullmovies', 'root', 'a12345678', {
-    host: 'localhost',
-    dialect: 'mysql'
-  });
-  await sequelize.authenticate();
+  await connection.authenticate();
   console.log('Connection has been established successfully.');
 } catch (error) {
     console.error('Unable to connect to the database:', error);
 }
 
-export default sequelize;
+export default connection;

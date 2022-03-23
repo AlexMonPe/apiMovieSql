@@ -29,7 +29,7 @@ const postUser = async (req,res,next) => { // con sequelize act
 //BUSCAR USUARIOS POR ID
 const getUserById = async (req, res) => {
     try{
-        res.json(await Users.find({_id: req.params.id}))
+        res.json(await Users.findAll({_id: req.params.id}))
     }catch(error){
         res.json(error)
     }  
@@ -42,7 +42,7 @@ const getUser = async (req,res) => {
         if (req.query.name) queryUser.name = req.query.name;
         if (req.query.email) queryUser.email = req.query.email;
         if (req.query.role) queryUser.role = req.query.role;
-        res.json(await Users.findAll(queryUser))    
+        res.json(await Users.findAll({where: queryUser}))    
     }catch(error){
         res.json(error)
     }
